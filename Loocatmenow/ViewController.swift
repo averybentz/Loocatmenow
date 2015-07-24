@@ -16,7 +16,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     //Create CLLocationManager obj
     let locationManager = CLLocationManager()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -25,9 +25,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -35,24 +34,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
-    CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: { (placemarks, error) -> Void in
-        
-        if (error != nil){
-            println("Error" + error.localizedDescription)
-            return
-        }
-        
-        if (placemarks.count > 0 ){
-            let pm = placemarks[0] as! CLPlacemark
-            self.displayLocationInfo(pm)
-        }
-        
-        else{
-            println("Error with data")
-        }
-    })
+        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: { (placemarks, error) -> Void in
+            
+            if (error != nil){
+                println("Error" + error.localizedDescription)
+                return
+            }
+            
+            if (placemarks.count > 0 ){
+                let pm = placemarks[0] as! CLPlacemark
+                self.displayLocationInfo(pm)
+            }
+                
+            else{
+                println("Error with data")
+            }
+        })
     }
-
+    
     func displayLocationInfo(placemark: CLPlacemark){
         
         //Stop updating the location
@@ -71,13 +70,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     }
     
     
-    
-    
-    //Function to display location on MapView
+    /*//Function to display location on MapView
     func displayLocationOnMap(placemark: CLPlacemark){
-        
-        
-    }
-
+    
+    self.MapView.showsUserLocation = true
+    let loc = CLLocationCoordinate2D
+    
+    let region = MKCoordinateRegionMakeWithDistance(loc, 500, 500)
+    self.MapView.setRegion(region, animated: true)
+    
+    }*/
+    
 }
+
+
 
