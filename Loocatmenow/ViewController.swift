@@ -15,16 +15,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet var MapView: MKMapView!
     
     //Create CLLocationManager obj
-    let locationManager = CLLocationManager()
+    let coreLocationManager = CLLocationManager()
+    //Create LocationManager instance
+    var locationManager = LocationManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
+        self.coreLocationManager.delegate = self
+        self.coreLocationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.coreLocationManager.requestWhenInUseAuthorization()
+        self.coreLocationManager.startUpdatingLocation()
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,7 +34,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         // Dispose of any resources that can be recreated.
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    /*func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
         CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: { (placemarks, error) -> Void in
             
@@ -50,12 +52,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                 println("Error with data")
             }
         })
-    }
+    }*/
     
-    func displayLocationInfo(placemark: CLPlacemark){
+    /*func displayLocationInfo(placemark: CLPlacemark){
         
         //Stop updating the location
-        self.locationManager.stopUpdatingLocation()
+        self.coreLocationManager.stopUpdatingLocation()
         //println(placemark.addressDictionary)
         println(placemark.locality)
         println(placemark.postalCode)
@@ -67,19 +69,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         
         //Print error
         println("Error" + error.localizedDescription)
+    }*/
+    
+    
+    func getLocation(){
+        
+        locationManager.startUpdatingLocationWithCompletionHandler { (latitude, longitude, status, verboseMessage, error) -> () in
+            
+        }
     }
     
-    
-    /*//Function to display location on MapView
-    func displayLocationOnMap(placemark: CLPlacemark){
-    
-    self.MapView.showsUserLocation = true
-    let loc = CLLocationCoordinate2D
-    
-    let region = MKCoordinateRegionMakeWithDistance(loc, 500, 500)
-    self.MapView.setRegion(region, animated: true)
-    
-    }*/
+    func displayLocation(location: CLLocation){
+        
+    }
     
 }
 
