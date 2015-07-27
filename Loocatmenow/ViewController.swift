@@ -81,6 +81,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     func displayLocation(location: CLLocation){
         
+        //Set region of the map
+        MapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude), span: MKCoordinateSpanMake(0.05, 0.05)), animated: true)
+        
     }
     
 }
