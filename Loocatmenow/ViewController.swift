@@ -7,26 +7,32 @@
 //
 
 import UIKit
-import CoreLocation
+//import CoreLocation
 import MapKit
 
 class ViewController: UIViewController, CLLocationManagerDelegate{
     
     @IBOutlet var MapView: MKMapView!
+    @IBOutlet var locationInfo: UILabel!
     
     //Create CLLocationManager obj
-    let coreLocationManager = CLLocationManager()
+    var coreLocationManager = CLLocationManager()
     //Create LocationManager instance
-    var locationManager = LocationManager.sharedInstance
+    var locationManager: LocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        // Do any additional setup after loading the view, typically from a nib./Users/averybentz/Downloads/LocationManager-master/LocationManager.swift
         
-        self.coreLocationManager.delegate = self
-        self.coreLocationManager.desiredAccuracy = kCLLocationAccuracyBest
+        coreLocationManager.delegate = self
+        
+        locationManager = LocationManager.sharedInstance
+        
+        /*self.coreLocationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.coreLocationManager.requestWhenInUseAuthorization()
-        self.coreLocationManager.startUpdatingLocation()
+        self.coreLocationManager.startUpdatingLocation()*/
+        
+        getLocation()
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,6 +82,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         
         locationManager.startUpdatingLocationWithCompletionHandler { (latitude, longitude, status, verboseMessage, error) -> () in
             
+            self.displayLocation(CLLocation(latitude: latitude, longitude: longitude))
+            
         }
     }
     
@@ -84,6 +92,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         //Set region of the map
         MapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude), span: MKCoordinateSpanMake(0.05, 0.05)), animated: true)
         
+        let locationPinCoord = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = locationPinCoord
+        
+        MapView.addAnnotation(annotation)
+        MapView.showAnnotations([annotation], animated: true)
+        
+        locationManager.reverseGeocodeLocationWithCoordinates(location, onReverseGeocodingCompletionHandler: { (reverseGecodeInfo, placemark, error) -> Void in
+        
+            let address = reverseGecodeInfo?.objectForKey("formattedAddress") as! String
+            self.locationInfo.text = address
+        })
+    }
+    
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        
+        if status != CLAuthorizationStatus.NotDetermined || status != CLAuthorizationStatus.Denied || status != CLAuthorizationStatus.Restricted{
+            // Get location
+            getLocation()
+        }
+    }
+    @IBAction func updateLocation(sender: AnyObject) {
+        
+        self.getLocation()
     }
     
 }
