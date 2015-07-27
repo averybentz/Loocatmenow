@@ -16,32 +16,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Uyz-eq-CVy">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="366"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Uyz-eq-CVy">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="365"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="365" id="zZE-U9-Nef"/>
+                                </constraints>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My location:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFL-5b-jgv">
-                                <rect key="frame" x="24" y="393" width="94" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <rect key="frame" x="24" y="393" width="129" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New York" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qe-GC-lw4">
                                 <rect key="frame" x="24" y="432" width="73" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zG4-sk-rbm">
-                                <rect key="frame" x="277" y="523" width="51" height="30"/>
-                                <state key="normal" title="Update">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmO-3V-x6h">
+                                <rect key="frame" x="128" y="494" width="46" height="30"/>
+                                <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="updateLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N28-Ra-fCK"/>
+                                    <action selector="updateLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H5y-2l-eKw"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Uyz-eq-CVy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="SYZ-y5-xbh"/>
+                            <constraint firstItem="Uyz-eq-CVy" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Wi3-P0-Vun"/>
+                            <constraint firstAttribute="trailing" secondItem="Uyz-eq-CVy" secondAttribute="trailing" id="jmV-Ws-hmc"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="MapView" destination="Uyz-eq-CVy" id="wvz-6F-qOf"/>
