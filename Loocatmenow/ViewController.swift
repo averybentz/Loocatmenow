@@ -13,8 +13,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     //Create CLLocationManager obj
     var coreLocationManager = CLLocationManager()
-
-    //var locationManager: LocationManager!
     
     @IBOutlet var MapView: MKMapView!
     @IBOutlet var locationInfo: UILabel!
@@ -50,16 +48,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         MapView.setRegion(region, animated: true)
         
-        println(coreLocationManager.location.description)
+        //println(coreLocationManager.location.description)
         
+        //Get address of the current location
         
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         
         println(error)
-        
-}
+    
+    }
+    
+    //User taps "Uppdate" button
     @IBAction func updateLocation(sender: AnyObject) {
         
         //Start updating location again
